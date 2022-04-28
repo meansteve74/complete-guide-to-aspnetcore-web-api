@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using my_books.Data;
 using my_books.Data.Services;
+using my_books.Exceptions;
 
 namespace my_books
 {
@@ -31,6 +32,8 @@ namespace my_books
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
             services.AddTransient<BooksService>();
+            services.AddTransient<AuthorsService>();
+            services.AddTransient<PublishersService>();
 
             services.AddSwaggerGen(c =>
             {
@@ -54,12 +57,15 @@ namespace my_books
 
             app.UseAuthorization();
 
+            app.ConfigureBuiltInExceptionHandler();
+            //app.ConfigureCustomExceptionHandler();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            AppDbInitializer.Seed(app);
+            //AppDbInitializer.Seed(app);
         }
     }
 }

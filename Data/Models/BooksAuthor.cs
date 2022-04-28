@@ -1,0 +1,11 @@
+﻿namespace my_books.Data.Models
+{
+    public class BooksAuthor
+    {
+        public int Id { get; set; }
+        public int BookId { get; set; }
+        public Book Book { get; set; }
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
+    }
+}
