@@ -25,7 +25,7 @@ namespace my_books.Controllers
         {
             _logger.LogInformation($"This is a log entry from {nameof(GetAllPublishers)}");
 
-            throw new Exception($"This is an exception from {nameof(GetAllPublishers)}");
+            //throw new Exception($"This is an exception from {nameof(GetAllPublishers)}");
 
             try
             {
