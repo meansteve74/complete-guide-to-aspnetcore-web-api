@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using my_books.Data.Models;
+using my_books.Data.Paging;
 using my_books.Data.ViewModels;
 
 namespace my_books.Data.Services
@@ -53,6 +56,32 @@ namespace my_books.Data.Services
                 _appDbContext.Publishers.Remove(publisher);
                 _appDbContext.SaveChanges();
             }
+        }
+
+        public List<Publisher> GetAllPublishers(string sortBy, string searchString, int? pageNumber)
+        {
+            var allPublishers = _appDbContext.Publishers.OrderBy(n => n.Name).ToList();
+
+            if (!string.IsNullOrEmpty(sortBy))
+            {
+                switch (sortBy)
+                {
+                    case "name_desc":
+                        allPublishers = allPublishers.OrderByDescending(n => n.Name).ToList();
+                        break;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                allPublishers = allPublishers.Where(n => n.Name.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            }
+
+            // Paging
+            var pageSize = 5;
+            allPublishers = PaginatedList<Publisher>.Create(allPublishers.AsQueryable(), pageNumber ?? 1, pageSize);
+
+            return allPublishers;
         }
     }
 }

@@ -17,6 +17,20 @@ namespace my_books.Controllers
             _publishersService = publishersService;
         }
 
+        [HttpGet("get-all-publishers")]
+        public IActionResult GetAllPublishers(string sortBy, string searchString, int pageNumber)
+        {
+            try
+            {
+                var result = _publishersService.GetAllPublishers(sortBy, searchString, pageNumber);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Sorry, we could not load the publishers");
+            }
+        }
+
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherVM publisherVm)
         {
