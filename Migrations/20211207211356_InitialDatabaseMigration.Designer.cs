@@ -21,7 +21,7 @@ namespace my_books.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("my_books.Data.Models.Book", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

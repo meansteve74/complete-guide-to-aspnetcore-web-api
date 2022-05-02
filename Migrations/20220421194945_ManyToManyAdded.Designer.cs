@@ -21,7 +21,7 @@ namespace my_books.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("my_books.Data.Models.Author", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,7 +36,7 @@ namespace my_books.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.Book", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,7 @@ namespace my_books.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.BooksAuthor", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.BooksAuthor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +102,7 @@ namespace my_books.Migrations
                     b.ToTable("BooksAuthors");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.Publisher", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Publisher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,9 +117,9 @@ namespace my_books.Migrations
                     b.ToTable("Publishers");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.Book", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Book", b =>
                 {
-                    b.HasOne("my_books.Data.Models.Publisher", "Publisher")
+                    b.HasOne("my_books.Publisher.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -128,15 +128,15 @@ namespace my_books.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.BooksAuthor", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.BooksAuthor", b =>
                 {
-                    b.HasOne("my_books.Data.Models.Author", "Author")
+                    b.HasOne("my_books.Publisher.Models.Author", "Author")
                         .WithMany("BooksAuthors")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("my_books.Data.Models.Book", "Book")
+                    b.HasOne("my_books.Publisher.Models.Book", "Book")
                         .WithMany("BooksAuthors")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -147,17 +147,17 @@ namespace my_books.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.Author", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Author", b =>
                 {
                     b.Navigation("BooksAuthors");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.Book", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Book", b =>
                 {
                     b.Navigation("BooksAuthors");
                 });
 
-            modelBuilder.Entity("my_books.Data.Models.Publisher", b =>
+            modelBuilder.Entity("my_books.Publisher.Models.Publisher", b =>
                 {
                     b.Navigation("Books");
                 });
